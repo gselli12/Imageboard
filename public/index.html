@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+        <div id="main">
+
+
+        </div>
+
+
+
+        <template id="images">
+            <div class = "images">
+                 {{#each images}}
+                    <div><img src="{{this}}" height="200px" width="200px"alt=""></div>
+                 {{/each}}
+            </div>
+        </template>
+
+        <script src="./js/handlebars.min.js"></script>
+        <script src="./js/jquery-3.1.1.min.js"></script>
+        <script src="./js/underscore-min.js"></script>
+        <script src="./js/backbone-min.js"></script>
+        <script src="./js/script.js"></script>
+    </body>
+</html>
