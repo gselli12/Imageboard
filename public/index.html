@@ -16,7 +16,10 @@
         <template id="images">
             <div class = "images">
                  {{#each images}}
-                    <div><img src="{{this}}" height="200px" width="200px"alt=""></div>
+                     <h3>{{this.title}}</h3>
+                    <div><img src="{{this.url}}" height="200px" width="200px"alt=""></div>
+                    <h5>{{this.description}}</h5>
+                    <p>by {{this.username}}</p>
                  {{/each}}
             </div>
         </template>

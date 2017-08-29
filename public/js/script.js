@@ -17,8 +17,6 @@
         url: '/home'
     });
 
-    //let homeModel = new HomeModel();
-
     var HomeView = Backbone.View.extend({
         initialize: function() {
             var view = this;
@@ -28,10 +26,10 @@
         },
         render: function() {
             var data = this.model.toJSON();
-            console.log("data", data.images);
+            console.log("data", data);
             var html = Handlebars.templates.images(data);
             this.$el.html(html);
-            //console.log("html", html);
+            console.log("html", html);
         }
     });
 
