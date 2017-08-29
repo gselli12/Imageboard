@@ -1,0 +1,44 @@
+*{
+    background-color: white;
+    font-family: Lato;
+    background-color: rgb(250, 235, 215)
+}
+
+.heading {
+    text-align: center;
+}
+
+.imageboard{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.elem {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 32%;
+    text-align: center;
+    margin-top: 6px;
+    background-color: white;
+}
+
+.imgBackground {
+    background-color: white;
+}
+
+.image {
+    width: 99%;
+    background-color: inherit;
+}
+
+.title {
+    margin: 2px;
+    background-color: inherit;
+}
+
+.username {
+    margin-top: -40px;
+    background-color: inherit;
+}

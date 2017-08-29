@@ -3,25 +3,38 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <link rel="stylesheet" href="stylesheet.css">
+
+
     </head>
     <body>
 
-        <div id="main">
+        <h1 class="heading">My Imagebord</h1>
 
+        <div id="main">
 
         </div>
 
 
 
+        <template id ="upload">
+                <input type="text" name="title" value="">
+                <input type="file">
+                <button>Upload</button>
+        </template>
+
         <template id="images">
-            <div class = "images">
-                 {{#each images}}
-                     <h3>{{this.title}}</h3>
-                    <div><img src="{{this.url}}" height="200px" width="200px"alt=""></div>
-                    <h5>{{this.description}}</h5>
-                    <p>by {{this.username}}</p>
-                 {{/each}}
-            </div>
+                <div class = "imageboard">
+                     {{#each images}}
+                         <div class="elem">
+                             <h3 class = "title">{{this.title}}</h3>
+                            <div class= "imgBackground"><img src="{{this.url}}" class = "image"alt=""></div>
+                            <h5 class="description">{{this.description}}</h5>
+                            <p class="username">by {{this.username}}</p>
+                        </div>
+                     {{/each}}
+
+                </div>
         </template>
 
         <script src="./js/handlebars.min.js"></script>
