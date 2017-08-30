@@ -28,7 +28,7 @@
 
 
         <template id ="upload">
-            <div id="upload-shadow">
+            <div class="shadow">
                     <div id = "upload-screen">
                         <a href="../"><img src="close-search.png" alt="" class="close"></a>
                         <input class="input-upload" type="text" name="username" value="" placeholder="Username">
@@ -53,13 +53,16 @@
         </template>
 
         <template id="image">
-            <p>Img appears</p>
-            <img src="{{this.image}}" alt="">
-            <p>Title: {{this.title}}</p>
-            <p>Description: {{this.description}}</p>
-            <p>Username: {{this.username}}</p>
-            <img src="" alt="">
-
+            <div class="shadow">
+                <div class="single-image-div">
+                    <a href="../"><img src="close-search.png" alt="" class="close"></a>
+                    <img class="single-image" src="{{this.image}}" alt="">
+                    <p>Title: {{this.title}}</p>
+                    <p>Description: {{this.description}}</p>
+                    <p>Username: {{this.username}}</p>
+                    <img src="" alt="">
+                </div>
+            </div>
         </template>
 
         <script src="./js/handlebars.min.js"></script>

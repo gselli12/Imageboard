@@ -121,6 +121,10 @@
             if(location.hash == '#upload') {
                 this.home();
             }
+            else if (location.hash.indexOf("#images") !== -1) {
+                this.home();
+            }
+
         },
         home:function(){
             new HomeView({

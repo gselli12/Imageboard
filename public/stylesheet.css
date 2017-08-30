@@ -4,6 +4,10 @@
     background-color: rgb(250, 235, 215)
 }
 
+p{
+    background-color: white;
+}
+
 .header {
     display: flex;
     flex-direction: row;
@@ -30,9 +34,6 @@
 }
 
 .imageboard{
-    /*display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;*/
     -moz-column-width: 30em;
     -webkit-column-width: 30em;
     -moz-column-gap: 1em;
@@ -40,13 +41,6 @@
 }
 
 .elem {
-    /*display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 32%;
-    text-align: center;
-    margin-top: 6px;
-    background-color: white;*/
     display: inline-block;
     margin:  0.25rem;
     padding:  1rem;
@@ -72,7 +66,7 @@
     background-color: inherit;
 }
 
-#upload-shadow {
+.shadow {
     position: absolute;
     left:0;
     top:0;
@@ -119,4 +113,23 @@
 input[type="file"] {
     color: rgba(0,0,0, 0.6);
     border: none;
+}
+
+.single-image-div {
+    padding-top: 100px;
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    left: 15%;
+    top: 15%;
+    z-index: 100;
+    background-color: white;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.single-image {
+    border-radius: 20px;
+    max-width: 80%;
+    max-height: 80%;
 }
