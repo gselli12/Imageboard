@@ -23,13 +23,17 @@
 
         <div id ="uploaddiv"></div>
 
+        <div id="imagediv"></div>
+
 
 
         <template id ="upload">
             <div id="upload-shadow">
                     <div id = "upload-screen">
                         <a href="../"><img src="close-search.png" alt="" class="close"></a>
+                        <input class="input-upload" type="text" name="username" value="" placeholder="Username">
                         <input class="input-upload" type="text" name="title" value="" placeholder="Title">
+                        <input class="input-upload" type="text" name="description" value="" placeholder="Description">
                         <input class="input-upload" type="file">
                         <button class="upload-button" id="bottom">Upload</button>
                 </div>
@@ -42,12 +46,20 @@
                          <div class="elem">
                              <h3 class = "title">{{this.title}}</h3>
                             <div class= "imgBackground"><a href="./#images/{{this.id}}" class="img"><img src="{{this.url}}" class = "image"alt=""></a></div>
-                            <h5 class="description">{{this.description}}</h5>
                             <p class="username">by {{this.username}}</p>
                         </div>
                      {{/each}}
-
                 </div>
+        </template>
+
+        <template id="image">
+            <p>Img appears</p>
+            <img src="{{this.image}}" alt="">
+            <p>Title: {{this.title}}</p>
+            <p>Description: {{this.description}}</p>
+            <p>Username: {{this.username}}</p>
+            <img src="" alt="">
+
         </template>
 
         <script src="./js/handlebars.min.js"></script>

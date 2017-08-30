@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const url = require("./config.json").s3Url;
-const{insertData ,getData} = require("./sql/dbqueries.js");
+const{getSingleData, insertData ,getData} = require("./sql/dbqueries.js");
 var multer = require('multer');
 var uidSafe = require('uid-safe');
 var path = require('path');
@@ -71,7 +71,7 @@ app.get("/home", function(req, res) {
             return(images);
         })
         .then((images) => {
-            console.log(images);
+            //console.log(images);
             res.json({'images': images});
         })
         .catch((err) => {
@@ -95,7 +95,7 @@ app.post("/upload", uploader.single('file'), function(req, res) {
             }
             )
             .then(() => {
-                let data = [req.file.filename, "username" ,req.body.title];
+                let data = [req.file.filename, req.body.username ,req.body.title, req.body.description];
                 insertData(data);
             });
 
@@ -106,6 +106,27 @@ app.post("/upload", uploader.single('file'), function(req, res) {
             success: false
         });
     }
+});
+
+app.get("/images/:id", function(req, res) {
+    let data = {};
+    let id = [req.params.id];
+    getSingleData(id)
+        .then((results) => {
+            data.image =  url + results.rows[0].image;
+            data.username = results.rows[0].username;
+            data.title = results.rows[0].title;
+            data.description = results.rows[0].description;
+            return(data);
+        })
+        .then((data) => {
+            console.log(data);
+            res.json({"data": data});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
 });
 
 app.listen(8080, () => {

@@ -17,7 +17,7 @@ var getData = () => {
 
 var insertData = (data) => {
 
-    db.query("INSERT INTO images (image, username, title) VALUES ($1, $2, $3);", data, (err, results) => {
+    return db.query("INSERT INTO images (image, username, title, description) VALUES ($1, $2, $3, $4);", data, (err, results) => {
         if(err) {
             throw err;
         } else {
@@ -27,6 +27,16 @@ var insertData = (data) => {
     });
 };
 
+var getSingleData = (id) => {
+    return db.query("SELECT image, username, title, description FROM images WHERE id = ($1);", id, (err, results) => {
+        if(err) {
+            throw err;
+        } else {
+            return(results);
+        }
+    });
+};
 
+module.exports.getSingleData = getSingleData;
 module.exports.insertData = insertData;
 module.exports.getData = getData;

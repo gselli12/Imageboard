@@ -18,10 +18,10 @@
         },
         render: function() {
             var data = this.model.toJSON();
-            console.log("data", data);
+            //console.log("data", data);
             var html = Handlebars.templates.images(data);
             this.$el.html(html);
-            console.log("html", html);
+            //console.log("html", html);
         }
     });
 
@@ -36,20 +36,34 @@
             'click button': function(e) {
                 this.model.set({
                     title: this.$el.find("input[name='title']").val(),
-                    file: this.$el.find("input[type='file']").prop('files')[0]
+                    file: this.$el.find("input[type='file']").prop('files')[0],
+                    username: this.$el.find("input[name='username']").val(),
+                    description: this.$el.find("input[name='description']").val(),
                 }).save();
             }
         }
     });
 
-    // var imageView = Backbone.View.extend({
-    //     initialize: function() {
-    //         this.render();
-    //     },
-    //     render: function() {
-    //         this.$el.html(Handlebars.templates.image({}));
-    //     },
-    // })
+    var ImageView = Backbone.View.extend({
+        initialize: function() {
+            console.log("initialize");
+            var view = this;
+            this.model.on('change', function() {
+                view.render();
+            });
+        },
+        render: function() {
+            console.log("render");
+            var data = this.model.toJSON();
+            console.log("data", data);
+            let html = Handlebars.templates.image(data.data);
+            this.$el.html(html);
+            console.log(html);
+        },
+        // events: {
+        //
+        // }
+    })
 
 
     var HomeModel = Backbone.Model.extend({
@@ -69,6 +83,8 @@
 
             formData.append('file', this.get('file'));
             formData.append('title', this.get('title'));
+            formData.append('username', this.get('username'));
+            formData.append('description', this.get('description'));
 
             var model = this;
             $.ajax({
@@ -84,22 +100,29 @@
         }
     });
 
-    // var imageModel = Backbone.Model.extend({
-    //     url: "/image/:id",
-    //     initialize: function() {
-    //         this.fetch();
-    //     }
-    // })
+    var ImageModel = Backbone.Model.extend({
+        url: function() {
+            return `/images/${this.get('id')}`;
+        },
+        initialize: function() {
+            this.fetch();
+        }
+    });
 
 
 
     const Router = Backbone.Router.extend({
         routes: {
             'upload': 'upload',
-            '': 'home'
+            '': 'home',
+            'images/:id': 'image'
+        },
+        initialize: function(){
+            if(location.hash == '#upload') {
+                this.home();
+            }
         },
         home:function(){
-            console.log("home");
             new HomeView({
                 el: '#main',
                 model: new HomeModel
@@ -109,6 +132,14 @@
             new UploadView({
                 el: '#uploaddiv',
                 model: new UploadModel
+            });
+        },
+        image: function(id) {
+            new ImageView({
+                el: '#imagediv',
+                model: new ImageModel({
+                    id: id
+                })
             });
         }
     });
