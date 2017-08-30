@@ -4,7 +4,7 @@ var spicedPg = require('spiced-pg');
 const db = spicedPg("postgres:" + login.username + ":" + login.password + "@localhost:5432/imageboard");
 
 var getData = () => {
-    return db.query("SELECT image, username, title, description FROM images LIMIT 6;", (err, results) => {
+    return db.query("SELECT image, username, title, description, id FROM images;", (err, results) => {
         if (err) {
             throw err;
         } else {
@@ -26,6 +26,7 @@ var insertData = (data) => {
         }
     });
 };
+
 
 module.exports.insertData = insertData;
 module.exports.getData = getData;

@@ -4,32 +4,62 @@
     background-color: rgb(250, 235, 215)
 }
 
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .heading {
     text-align: center;
 }
 
+.upload-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: red;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    /*margin-top: 30px;*/
+}
+
 .imageboard{
-    display: flex;
+    /*display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap;*/
+    -moz-column-width: 30em;
+    -webkit-column-width: 30em;
+    -moz-column-gap: 1em;
+    -webkit-column-gap: 1em;
 }
 
 .elem {
-    display: flex;
+    /*display: flex;
     flex-direction: column;
     margin: auto;
     width: 32%;
     text-align: center;
     margin-top: 6px;
-    background-color: white;
+    background-color: white;*/
+    display: inline-block;
+    margin:  0.25rem;
+    padding:  1rem;
+    width:  100%;
+    background:  #efefef;
 }
 
 .imgBackground {
-    background-color: white;
+    background-color: #efefef;
 }
 
 .image {
-    width: 99%;
+    width: 100%;
     background-color: inherit;
 }
 
@@ -39,6 +69,55 @@
 }
 
 .username {
-    margin-top: -40px;
+    margin-top: -20px;
     background-color: inherit;
+}
+
+#upload-shadow {
+    position: absolute;
+    left:0;
+    top:0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0, 0.3);
+    overflow: hidden;
+}
+
+
+#upload-screen {
+    padding-top: 3%;
+    position: absolute;
+    width: 30%;
+    height: 20%;
+    left: 40%;
+    top: 40%;
+    z-index: 100;
+    background-color: white;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.close {
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+.input-upload {
+    margin-top: 3%;
+    background-color: inherit;
+    border: 1px solid rgba(0,0,0, 0.3);
+}
+
+#bottom.upload-button {
+    bottom: 20px;
+    top: auto;
+}
+
+input[type="file"] {
+    color: rgba(0,0,0, 0.6);
+    border: none;
 }

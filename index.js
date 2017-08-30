@@ -66,6 +66,7 @@ app.get("/home", function(req, res) {
                 images[i].username = results.rows[i].username;
                 images[i].title = results.rows[i].title;
                 images[i].description = results.rows[i].description;
+                images[i].id = results.rows[i].id;
             }
             return(images);
         })

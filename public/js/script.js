@@ -9,14 +9,6 @@
 
     Handlebars.partials = Handlebars.templates;
 
-    var HomeModel = Backbone.Model.extend({
-        initialize: function(){
-            console.log("initialise");
-            this.fetch();
-        },
-        url: '/home'
-    });
-
     var HomeView = Backbone.View.extend({
         initialize: function() {
             var view = this;
@@ -33,28 +25,39 @@
         }
     });
 
-
-    const Router = Backbone.Router.extend({
-        routes: {
-            'upload': 'upload',
-            '': 'home'
+    var UploadView = Backbone.View.extend({
+        initialize: function() {
+            this.render();
         },
-        home:function(){
-            console.log("home")
-            new HomeView({
-                el: '#main',
-                model: new HomeModel
-            });
+        render: function() {
+            this.$el.html(Handlebars.templates.upload({}))
         },
-        upload: function() {
-            new UploadView({
-                el: '#main',
-                model: new UploadModel
-            });
+        events: {
+            'click button': function(e) {
+                this.model.set({
+                    title: this.$el.find("input[name='title']").val(),
+                    file: this.$el.find("input[type='file']").prop('files')[0]
+                }).save();
+            }
         }
     });
 
+    // var imageView = Backbone.View.extend({
+    //     initialize: function() {
+    //         this.render();
+    //     },
+    //     render: function() {
+    //         this.$el.html(Handlebars.templates.image({}));
+    //     },
+    // })
 
+
+    var HomeModel = Backbone.Model.extend({
+        initialize: function(){
+            this.fetch();
+        },
+        url: '/home'
+    });
 
     var UploadModel = Backbone.Model.extend({
         url: '/upload',
@@ -81,22 +84,34 @@
         }
     });
 
-    var UploadView = Backbone.View.extend({
-        initialize: function() {
-            this.render();
+    // var imageModel = Backbone.Model.extend({
+    //     url: "/image/:id",
+    //     initialize: function() {
+    //         this.fetch();
+    //     }
+    // })
+
+
+
+    const Router = Backbone.Router.extend({
+        routes: {
+            'upload': 'upload',
+            '': 'home'
         },
-        render: function() {
-            this.$el.html(Handlebars.templates.upload({}))
+        home:function(){
+            console.log("home");
+            new HomeView({
+                el: '#main',
+                model: new HomeModel
+            });
         },
-        events: {
-            'click button': function(e) {
-                this.model.set({
-                    title: this.$el.find("input[name='title']").val(),
-                    file: this.$el.find("input[type='file']").prop('files')[0]
-                }).save();
-            }
+        upload: function() {
+            new UploadView({
+                el: '#uploaddiv',
+                model: new UploadModel
+            });
         }
-    })
+    });
 
 
     var router = new Router();

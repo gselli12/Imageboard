@@ -9,18 +9,31 @@
     </head>
     <body>
 
+    <div class ="header">
+
         <h1 class="heading">My Imagebord</h1>
+
+        <a href="./#upload"><button class="upload-button">Upload</button></a>
+
+    </div>
 
         <div id="main">
 
         </div>
 
+        <div id ="uploaddiv"></div>
+
 
 
         <template id ="upload">
-                <input type="text" name="title" value="">
-                <input type="file">
-                <button>Upload</button>
+            <div id="upload-shadow">
+                    <div id = "upload-screen">
+                        <a href="../"><img src="close-search.png" alt="" class="close"></a>
+                        <input class="input-upload" type="text" name="title" value="" placeholder="Title">
+                        <input class="input-upload" type="file">
+                        <button class="upload-button" id="bottom">Upload</button>
+                </div>
+            </div>
         </template>
 
         <template id="images">
@@ -28,7 +41,7 @@
                      {{#each images}}
                          <div class="elem">
                              <h3 class = "title">{{this.title}}</h3>
-                            <div class= "imgBackground"><img src="{{this.url}}" class = "image"alt=""></div>
+                            <div class= "imgBackground"><a href="./#images/{{this.id}}" class="img"><img src="{{this.url}}" class = "image"alt=""></a></div>
                             <h5 class="description">{{this.description}}</h5>
                             <p class="username">by {{this.username}}</p>
                         </div>
