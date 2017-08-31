@@ -25,6 +25,14 @@
         }
     });
 
+    var HomeModel = Backbone.Model.extend({
+        initialize: function(){
+            this.fetch();
+        },
+        url: '/home'
+    });
+
+
     var UploadView = Backbone.View.extend({
         initialize: function() {
             this.render();
@@ -33,44 +41,30 @@
             this.$el.html(Handlebars.templates.upload({}))
         },
         events: {
-            'click button': function(e) {
+            'click': function() {
+                var scroll = $(window).scrollTop();
+                this.$el.empty();
+                location.hash = "";
+                $(window).scrollTop(scroll);
+            },
+            'click .close': function() {
+                var scroll = $(window).scrollTop();
+                this.$el.empty();
+                location.hash = "";
+                $(window).scrollTop(scroll);
+            },
+            'click button': function() {
                 this.model.set({
                     title: this.$el.find("input[name='title']").val(),
                     file: this.$el.find("input[type='file']").prop('files')[0],
                     username: this.$el.find("input[name='username']").val(),
                     description: this.$el.find("input[name='description']").val(),
                 }).save();
+            },
+            'click #upload-screen': function(e) {
+                e.stopPropagation();
             }
         }
-    });
-
-    var ImageView = Backbone.View.extend({
-        initialize: function() {
-            console.log("initialize");
-            var view = this;
-            this.model.on('change', function() {
-                view.render();
-            });
-        },
-        render: function() {
-            console.log("render");
-            var data = this.model.toJSON();
-            console.log("data", data);
-            let html = Handlebars.templates.image(data.data);
-            this.$el.html(html);
-            console.log(html);
-        },
-        // events: {
-        //
-        // }
-    })
-
-
-    var HomeModel = Backbone.Model.extend({
-        initialize: function(){
-            this.fetch();
-        },
-        url: '/home'
     });
 
     var UploadModel = Backbone.Model.extend({
@@ -97,6 +91,42 @@
                     model.trigger('uploadSuccess');
                 }
             });
+        }
+    });
+
+
+    var ImageView = Backbone.View.extend({
+        initialize: function() {
+            console.log("initialize");
+            var view = this;
+            this.model.on('change', function() {
+                view.render();
+            });
+        },
+        render: function() {
+            console.log("render");
+            var data = this.model.toJSON();
+            console.log("data", data);
+            let html = Handlebars.templates.image(data.data);
+            this.$el.html(html);
+            console.log(html);
+        },
+        events: {
+            'click': function() {
+                var scroll = $(window).scrollTop();
+                this.$el.empty();
+                location.hash = "";
+                $(window).scrollTop(scroll);
+            },
+            'click .close': function() {
+                var scroll = $(window).scrollTop();
+                this.$el.empty();
+                location.hash = "";
+                $(window).scrollTop(scroll);
+            },
+            'click .single-image-div': function(e) {
+                e.stopPropagation();
+            }
         }
     });
 
