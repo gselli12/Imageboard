@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const url = require("./config.json").s3Url;
-const{getComments ,getSingleData, insertData ,getData} = require("./sql/dbqueries.js");
+const{addComment, getComments ,getSingleData, insertData ,getData} = require("./sql/dbqueries.js");
 var multer = require('multer');
 var uidSafe = require('uid-safe');
 var path = require('path');
@@ -80,6 +80,7 @@ app.get("/home", function(req, res) {
 });
 
 
+
 app.post("/upload", uploader.single('file'), function(req, res) {
     if(req.file) {
         uploadToS3(req.file)
@@ -149,6 +150,20 @@ app.get("/images/:id", function(req, res) {
         });
 
 });
+
+app.post("/images/:id", function(req, res){
+    let id = req.params.id;
+    let comment = req.body.comment;
+    let username = req.body.username;
+    let data = [id, comment, username];
+    addComment(data)
+        .then(() => {
+            res.json({
+                success:true
+            });
+        });
+});
+
 
 app.listen(8080, () => {
     console.log("listening on port 8080");

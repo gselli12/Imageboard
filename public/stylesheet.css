@@ -138,7 +138,7 @@ input[type="file"] {
     background-color: inherit;
 }
 
-.rightImage {
+.comments {
     background-color: inherit;
     border: 1px solid black;
 }
@@ -149,4 +149,8 @@ input[type="file"] {
     margin: 30px;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.addComment {
+    background-color: white;
 }

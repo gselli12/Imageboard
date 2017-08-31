@@ -18,11 +18,9 @@
         },
         render: function() {
             var data = this.model.toJSON();
-            //console.log("data", data);
             var html = Handlebars.templates.images(data);
             this.$el.html(html);
-            //console.log("html", html);
-        }
+        },
     });
 
     var HomeModel = Backbone.Model.extend({
@@ -35,6 +33,10 @@
 
     var UploadView = Backbone.View.extend({
         initialize: function() {
+            this.model.on('uploadSuccess', function() {
+                $('#uploaddiv').empty();
+                location.hash = "";
+            });
             this.render();
         },
         render: function() {
@@ -60,18 +62,24 @@
                     username: this.$el.find("input[name='username']").val(),
                     description: this.$el.find("input[name='description']").val(),
                 }).save();
+
+                // var scroll = $(window).scrollTop();
+                // this.$el.empty();
+                // location.hash = "";
+                // $(window).scrollTop(scroll);
             },
             'click #upload-screen': function(e) {
                 e.stopPropagation();
-            }
+            },
         }
     });
 
     var UploadModel = Backbone.Model.extend({
-        url: '/upload',
+
         initialize: function() {
             this.fetch();
         },
+        url: '/upload',
         save: function() {
             var formData = new FormData();
 
@@ -88,6 +96,7 @@
                 processData: false,
                 contentType: false,
                 success: function() {
+                    console.log("uploadSuccess")
                     model.trigger('uploadSuccess');
                 }
             });
@@ -97,20 +106,19 @@
 
     var ImageView = Backbone.View.extend({
         initialize: function() {
-            console.log("initialize");
             var view = this;
             this.model.on('change', function() {
+                view.render();
+            });
+            this.model.on('commentSuccess', function() {
                 view.render();
             });
         },
         render: function() {
             console.log("render");
             var data = this.model.toJSON();
-
-            console.log("data", data);
             let html = Handlebars.templates.image(data);
             this.$el.html(html);
-            console.log(html);
         },
         events: {
             'click': function() {
@@ -127,16 +135,42 @@
             },
             'click .single-image-div': function(e) {
                 e.stopPropagation();
+            },
+            'click button': function() {
+                this.model.set({
+                    comment: this.$el.find("input[name='comment']").val(),
+                    username: this.$el.find("input[name='username']").val()
+                }).save();
+
             }
         }
     });
 
     var ImageModel = Backbone.Model.extend({
         url: function() {
-            return `/images/${this.get('id')}`;
+            let id = this.attributes.id;
+            return('/images/' + id);
         },
         initialize: function() {
             this.fetch();
+        },
+        save: function() {
+            var model = this;
+
+            let data = {
+                comment: model.get('comment'),
+                username: model.get('username')
+            };
+
+            $.ajax({
+                url: this.url(),
+                method: 'POST',
+                data: data,
+                success: function() {
+                    console.log("comment success");
+                    model.trigger('commentSuccess');
+                }
+            });
         }
     });
 
@@ -158,18 +192,21 @@
 
         },
         home:function(){
+            $('#main').off();
             new HomeView({
                 el: '#main',
                 model: new HomeModel
             });
         },
         upload: function() {
+            $('#uploaddiv').off();
             new UploadView({
                 el: '#uploaddiv',
                 model: new UploadModel
             });
         },
         image: function(id) {
+            $('#imagediv').off();
             new ImageView({
                 el: '#imagediv',
                 model: new ImageModel({

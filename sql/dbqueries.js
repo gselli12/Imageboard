@@ -47,6 +47,19 @@ var getComments = (id) => {
     });
 };
 
+var addComment = (data) => {
+    return db.query("INSERT INTO comments (image_id, comment, username) VALUES ($1, $2, $3);", data, (err, results) => {
+        if(err) {
+            throw err;
+        } else {
+            console.log(results);
+            return(results);
+        }
+    });
+};
+
+
+module.exports.addComment = addComment;
 module.exports.getComments = getComments;
 module.exports.getSingleData = getSingleData;
 module.exports.insertData = insertData;

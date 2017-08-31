@@ -45,7 +45,11 @@
                      {{#each images}}
                          <div class="elem">
                              <h3 class = "title">{{this.title}}</h3>
-                            <div class= "imgBackground"><a href="./#images/{{this.id}}" class="img"><img src="{{this.url}}" class="image"alt=""></a></div>
+                            <div class= "imgBackground">
+                                <a href="./#images/{{this.id}}" class="img">
+                                    <img src="{{this.url}}" class="image"alt="">
+                                </a>
+                            </div>
                             <p class="username">by {{this.username}}</p>
                         </div>
                      {{/each}}
@@ -56,17 +60,23 @@
             <div class="shadow">
                 <div class="single-image-div">
                     <div class="leftImage">
-                        <p>Title: {{data.title}}</p>
                         <img src="close-search.png" alt="" class="close">
                         <img class="single-image" src="{{data.image}}" alt="">
+                        <p>Title: {{data.title}}</p>
                         <p>Description: {{data.description}}</p>
                         <p>Username: {{data.username}}</p>
                     </div>
 
-                    <div class="rightImage">
+                    <div class="comments">
                         {{#each comments}}
-                            <p>{{this.comment}}</p>
+                            <p>'{{this.comment}}'</p>
+                            <p>by {{this.username}} at {{this.time}}</p>
                         {{/each}}
+                        <div class="addComment">
+                            <input type="text" name="comment" placeholder="Add Comment" value="">
+                            <input type="text" name="username" placeholder="Name" value="">
+                            <button class="addComment">Add</button>
+                        </div>
                     </div>
 
 
