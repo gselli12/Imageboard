@@ -21,7 +21,7 @@ var insertData = (data) => {
         if(err) {
             throw err;
         } else {
-            console.log(results);
+            //console.log(results);
             return(results);
         }
     });
@@ -37,6 +37,17 @@ var getSingleData = (id) => {
     });
 };
 
+var getComments = (id) => {
+    return db.query("SELECT comment, username, created_at FROM comments WHERE image_id = ($1);", id, (err, results) => {
+        if(err) {
+            throw (err);
+        } else {
+            return (results);
+        }
+    });
+};
+
+module.exports.getComments = getComments;
 module.exports.getSingleData = getSingleData;
 module.exports.insertData = insertData;
 module.exports.getData = getData;

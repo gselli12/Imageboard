@@ -106,8 +106,9 @@
         render: function() {
             console.log("render");
             var data = this.model.toJSON();
+
             console.log("data", data);
-            let html = Handlebars.templates.image(data.data);
+            let html = Handlebars.templates.image(data);
             this.$el.html(html);
             console.log(html);
         },

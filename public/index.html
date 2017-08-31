@@ -55,12 +55,22 @@
         <template id="image">
             <div class="shadow">
                 <div class="single-image-div">
-                    <img src="close-search.png" alt="" class="close">
-                    <img class="single-image" src="{{this.image}}" alt="">
-                    <p>Title: {{this.title}}</p>
-                    <p>Description: {{this.description}}</p>
-                    <p>Username: {{this.username}}</p>
-                    <img src="" alt="">
+                    <div class="leftImage">
+                        <p>Title: {{data.title}}</p>
+                        <img src="close-search.png" alt="" class="close">
+                        <img class="single-image" src="{{data.image}}" alt="">
+                        <p>Description: {{data.description}}</p>
+                        <p>Username: {{data.username}}</p>
+                    </div>
+
+                    <div class="rightImage">
+                        {{#each comments}}
+                            <p>{{this.comment}}</p>
+                        {{/each}}
+                    </div>
+
+
+
                 </div>
             </div>
         </template>

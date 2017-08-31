@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const url = require("./config.json").s3Url;
-const{getSingleData, insertData ,getData} = require("./sql/dbqueries.js");
+const{getComments ,getSingleData, insertData ,getData} = require("./sql/dbqueries.js");
 var multer = require('multer');
 var uidSafe = require('uid-safe');
 var path = require('path');
@@ -110,18 +110,39 @@ app.post("/upload", uploader.single('file'), function(req, res) {
 
 app.get("/images/:id", function(req, res) {
     let data = {};
+    let comments = [];
     let id = [req.params.id];
-    getSingleData(id)
+    Promise.all([
+        getSingleData(id),
+        getComments(id)
+    ])
         .then((results) => {
-            data.image =  url + results.rows[0].image;
-            data.username = results.rows[0].username;
-            data.title = results.rows[0].title;
-            data.description = results.rows[0].description;
-            return(data);
+            data.image =  url + results[0].rows[0].image;
+            data.username = results[0].rows[0].username;
+            data.title = results[0].rows[0].title;
+            data.description = results[0].rows[0].description;
+
+            for (let i = 0; i < results[1].rows.length; i ++) {
+                comments[i] = {};
+                comments[i].comment = results[1].rows[i].comment;
+                comments[i].username = results[1].rows[i].username;
+                comments[i].time = results[1].rows[i].created_at;
+            }
+
+            let obj = {
+                data: data,
+                comments: comments
+            };
+
+            return(obj);
         })
-        .then((data) => {
-            console.log(data);
-            res.json({"data": data});
+        .then((obj) => {
+            // console.log("data", obj.data);
+            // console.log("comments", obj.comments);
+            res.json({
+                "data": obj.data,
+                "comments": obj.comments
+            });
         })
         .catch((err) => {
             console.log(err);
