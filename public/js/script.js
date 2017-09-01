@@ -119,9 +119,11 @@
             this.model.on('change', function() {
                 view.render();
             });
-            this.model.on('commentSuccess', function() {
-                view.render();
-            });
+            // this.model.on('commentSuccess', function() {
+            //
+            //
+            //
+            // });
         },
         render: function() {
             console.log("render");
@@ -165,10 +167,19 @@
                 e.stopPropagation();
             },
             'click button': function() {
+
+                let comment = this.$el.find("input[name='comment']").val();
+                let username = this.$el.find("input[name='username']").val()
+
                 this.model.set({
-                    comment: this.$el.find("input[name='comment']").val(),
-                    username: this.$el.find("input[name='username']").val()
+                    comment: comment,
+                    username: username
                 }).save();
+
+                let elem = "<p class='comment'>" + comment + "</p><p class='commentInfo'>by " + username + "</p>";
+
+                $('#comments').append(elem);
+
             },
             'keydown': function(e) {
                 if(e.which == 27) {

@@ -219,6 +219,10 @@ input[type="file"] {
     width: 95%;
 }
 
+#comments {
+    background-color: inherit;
+}
+
 .commentInfo {
     margin: 0;
     margin-top: 3px;

@@ -61,17 +61,20 @@
                         <img src="close-search.png" alt="" class="close">
                         <img class="single-image" src="{{data.image}}" alt="">
                         <h4>{{data.title}}</h4>
-                    
+
                         <p>By: {{data.username}}</p>
                     </div>
 
                     <div class="comments">
-                        {{#each comments}}
-                            <div class="singleComment">
-                                <p class="comment">'{{this.comment}}'</p>
-                                <p class="commentInfo">by {{this.username}} at {{this.time}}</p>
-                            </div>
-                        {{/each}}
+                        <div id="comments">
+                            {{#each comments}}
+                                <div class="singleComment">
+                                    <p class="comment">'{{this.comment}}'</p>
+                                    <p class="commentInfo">by {{this.username}}</p>
+                                </div>
+                            {{/each}}
+                        </div>
+
                         <div class="addComment">
                             <input type="text" name="comment" id="text-comment" class="input-upload" placeholder="Add Comment (max 80 characters)" value="" maxlength="80">
                             <input type="text" class="input-upload" name="username" placeholder="Name" value="" maxlength="80">
