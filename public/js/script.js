@@ -40,7 +40,8 @@
             this.render();
         },
         render: function() {
-            this.$el.html(Handlebars.templates.upload({}))
+            this.$el.html(Handlebars.templates.upload({}));
+            $('input[name=username]').focus();
         },
         events: {
             'click': function() {
@@ -54,6 +55,14 @@
                 this.$el.empty();
                 location.hash = "";
                 $(window).scrollTop(scroll);
+            },
+            'keydown': function(e) {
+                if(e.which == 27) {
+                    var scroll = $(window).scrollTop();
+                    this.$el.empty();
+                    location.hash = "";
+                    $(window).scrollTop(scroll);
+                }
             },
             'click button': function() {
                 this.model.set({
@@ -119,6 +128,25 @@
             var data = this.model.toJSON();
             let html = Handlebars.templates.image(data);
             this.$el.html(html);
+            $('input[name=comment]').focus();
+            $('.single-image').each(function() {
+                var $this = $(this);
+                let ratio = $this.width()/$this.height()
+                if(ratio > 1.5) {
+                    $this.addClass("landscape-pic");
+                    $('.single-image-div').addClass("landscape-cont");
+                } else if (1.5 >= ratio && ratio > 0.75) {
+                    $this.addClass("square-pic");
+                    $('.single-image-div').addClass("square-cont");
+                    $('.leftImage').addClass("square-div");
+                    $('.comments').addClass("square-comments");
+                } else {
+                    $this.addClass("portrait-pic");
+                    $('.single-image-div').addClass("portrait-cont");
+                    $('.leftImage').addClass("portrait-div");
+                    $('.comments').addClass("portrait-comments");
+                }
+            });
         },
         events: {
             'click': function() {
@@ -141,8 +169,15 @@
                     comment: this.$el.find("input[name='comment']").val(),
                     username: this.$el.find("input[name='username']").val()
                 }).save();
-
-            }
+            },
+            'keydown': function(e) {
+                if(e.which == 27) {
+                    var scroll = $(window).scrollTop();
+                    this.$el.empty();
+                    location.hash = "";
+                    $(window).scrollTop(scroll);
+                }
+            },
         }
     });
 
@@ -220,6 +255,15 @@
     var router = new Router();
 
     Backbone.history.start();
+
+    $('.single-image').each(function() {
+        var $this = $(this);
+        if($this.width() > $this.height()) {
+            $this.addClass("horizontal");
+        } else {
+            $this.addClass("vertical");
+        }
+    });
 
 
 })();

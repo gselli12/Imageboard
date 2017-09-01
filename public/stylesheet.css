@@ -4,8 +4,15 @@
     background-color: rgb(250, 235, 215)
 }
 
+h4 {
+    background-color: white;
+    margin: 2px;
+    margin-top: 20px;
+}
+
 p{
     background-color: white;
+    margin: 3px;
 }
 
 .header {
@@ -84,7 +91,7 @@ p{
     top: 40%;
     z-index: 100;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 3px;
     text-align: center;
 }
 
@@ -93,7 +100,7 @@ p{
     height: 30px;
     width: 30px;
     position: absolute;
-    top: 30px;
+    top: 10px;
     right: 30px;
 }
 
@@ -114,43 +121,128 @@ input[type="file"] {
 }
 
 .single-image-div {
-    padding-top: 100px;
+    padding-top: 0;
     position: absolute;
-    width: 70%;
-    height: 70%;
-    left: 15%;
-    top: 15%;
+    width: 90%;
+    height: 85%;
+    left: 5%;
+    top: 7%;
     z-index: 100;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 0;
     text-align: center;
     display: flex;
     flex-direction: row;
 }
 
-.single-image {
-    /*border-radius: 20px;*/
-    max-width: 80%;
-    max-height: 80%;
-}
-
 .leftImage{
     background-color: inherit;
+    border-radius: inherit;
+    width: 80%;
 }
 
 .comments {
+    width: 20%;
     background-color: inherit;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    margin: 0;
+    border-radius: inherit;
+    padding-top: 30px;
 }
 
-.comments {
-    background-color: white;
-    border: 1px solid black;
-    margin: 30px;
-    margin-top: 0;
-    margin-bottom: 0;
+.single-image {
+    object-fit: cover;
 }
+
+.portrait-cont {
+    height: 81%;
+    width: 60%;
+    left: 20%;
+    top: 10%;
+}
+
+.portrait-div {
+    width: 50%;
+}
+
+.portrait-pic {
+    max-height: 100%;
+    width: 100%;
+}
+
+.portrait-comments {
+    width: 50%;
+}
+
+.square-cont {
+    width: 73%;
+    height: 80%;
+    top: 10%;
+    left: 13%;
+}
+
+.square-div {
+    width: 75%;
+}
+
+.square-pic {
+    width: 100%
+}
+
+.square-comments {
+    width: 25%;
+}
+
+.landscape-cont {
+    height: 80%;
+}
+
+.landscape-pic {
+    width: 100%;
+}
+
+
+
+
+
+.singleComment {
+    /*border: 1px solid black;*/
+    border-radius: inherit;
+    margin-top: 8px;
+    background-color: inherit;
+    width: 98%;
+}
+
+.comment {
+    margin: 0;
+    border-radius: inherit;
+    width: 95%;
+}
+
+.commentInfo {
+    margin: 0;
+    margin-top: 3px;
+    font-size: 13px;
+    color: rgba(0,0,0, 0.6);
+    border-radius: inherit;
+}
+
 
 .addComment {
+    margin-top: 10px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+#commentButton.upload-button {
+    position: relative;
+    right: 0;
+    top: 10px;
+}
+
+#text-comment {
+    height: 30px;
 }

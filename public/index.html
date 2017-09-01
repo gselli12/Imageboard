@@ -17,9 +17,7 @@
 
     </div>
 
-        <div id="main">
-
-        </div>
+        <div id="main"></div>
 
         <div id ="uploaddiv"></div>
 
@@ -62,20 +60,22 @@
                     <div class="leftImage">
                         <img src="close-search.png" alt="" class="close">
                         <img class="single-image" src="{{data.image}}" alt="">
-                        <p>Title: {{data.title}}</p>
-                        <p>Description: {{data.description}}</p>
-                        <p>Username: {{data.username}}</p>
+                        <h4>{{data.title}}</h4>
+                    
+                        <p>By: {{data.username}}</p>
                     </div>
 
                     <div class="comments">
                         {{#each comments}}
-                            <p>'{{this.comment}}'</p>
-                            <p>by {{this.username}} at {{this.time}}</p>
+                            <div class="singleComment">
+                                <p class="comment">'{{this.comment}}'</p>
+                                <p class="commentInfo">by {{this.username}} at {{this.time}}</p>
+                            </div>
                         {{/each}}
                         <div class="addComment">
-                            <input type="text" name="comment" placeholder="Add Comment" value="">
-                            <input type="text" name="username" placeholder="Name" value="">
-                            <button class="addComment">Add</button>
+                            <input type="text" name="comment" id="text-comment" class="input-upload" placeholder="Add Comment (max 80 characters)" value="" maxlength="80">
+                            <input type="text" class="input-upload" name="username" placeholder="Name" value="" maxlength="80">
+                            <button class="upload-button" id="commentButton">Add</button>
                         </div>
                     </div>
 
