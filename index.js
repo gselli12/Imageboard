@@ -60,6 +60,7 @@ app.get("/home", function(req, res) {
     let images = [];
     getData()
         .then((results) => {
+            // console.log(imagesToLoad, noOfLoads);
             for (let i = 0; i < results.rows.length; i ++) {
                 images[i] = {};
                 images[i].url = url + results.rows[i].image;

@@ -16,7 +16,6 @@ var getData = () => {
 };
 
 var insertData = (data) => {
-
     return db.query("INSERT INTO images (image, username, title, description) VALUES ($1, $2, $3, $4);", data, (err, results) => {
         if(err) {
             throw err;

@@ -176,7 +176,7 @@
                     username: username
                 }).save();
 
-                let elem = "<p class='comment'>" + comment + "</p><p class='commentInfo'>by " + username + "</p>";
+                let elem = "<p class='comment'>'" + comment + "'</p><p class='commentInfo'>by " + username + "</p>";
 
                 $('#comments').append(elem);
 
