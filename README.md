@@ -1,7 +1,7 @@
 # Imageboard
 
 ## Summary:
-An imageborad that allows users to upload their favorite pictures and comment on them.
+An Imageboard that allows users to upload their favorite pictures and comment on them and the images of other users.
 
 ## Tech Stack:
 * Backbone.js
